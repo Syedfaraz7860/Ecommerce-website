@@ -11,13 +11,13 @@ import path from "path";
 
 dotenv.config();
 
-const app = express();   // ✅ sabse pehle app banao
+const app = express();
 
 // middleware
 app.use(cors());
 app.use(express.json());
 
-// ✅ static folder (sirf ek baar)
+// static files
 app.use('/uploads', express.static(path.resolve("uploads")));
 
 // routes
@@ -35,7 +35,9 @@ app.get('/', (req, res) => {
 // DB connect
 connectDB();
 
-// server start
-app.listen(5001, () => {
-    console.log('Server is running on port 5001');
+// ✅ IMPORTANT: PORT fix for deployment
+const PORT = process.env.PORT || 5001;
+
+app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
 });
