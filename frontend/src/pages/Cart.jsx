@@ -7,7 +7,6 @@ export default function Cart() {
   const [cart, setCart] = useState(null);
   const navigate = useNavigate();
 
-  //Load cart data
   const loadCart = async () => {
     if (!userId) return;
     const res = await api.get(`/cart/${userId}`);
@@ -24,7 +23,6 @@ export default function Cart() {
     window.dispatchEvent(new Event("cartUpdated"));
   };
 
-  //Update item quantity
   const updateQty = async (productId, quantity) => {
     if (quantity === 0) {
       await removeItem(productId);
@@ -59,20 +57,26 @@ export default function Cart() {
               className="flex items-center justify-between p-4 border rounded"
             >
               <div className="flex items-center gap-4">
+                
+                {/* ✅ IMAGE FIX */}
                 <img
-                  src={item.productId.image}
+                  src={`http://localhost:5001${item.productId.image}`}
                   alt={item.productId.title}
                   className="w-16 h-16 object-cover rounded"
                 />
+
                 <div>
                   <h2 className="text-lg font-semibold">
                     {item.productId.title}
                   </h2>
+
+                  {/* ✅ PRICE FIX */}
                   <p className="text-gray-600">
-                    ${item.productId.price.toFixed(2)}
+                    ₹{item.productId.price.toFixed(2)}
                   </p>
                 </div>
               </div>
+
               <div className="flex items-center gap-2">
                 <button
                   onClick={() =>
@@ -82,7 +86,9 @@ export default function Cart() {
                 >
                   -
                 </button>
+
                 <span>{item.quantity}</span>
+
                 <button
                   onClick={() =>
                     updateQty(item.productId._id, item.quantity + 1)
@@ -92,11 +98,14 @@ export default function Cart() {
                   +
                 </button>
               </div>
+
               <div>
+                {/* ✅ ITEM TOTAL FIX */}
                 <p className="font-semibold">
-                  ${(item.productId.price * item.quantity).toFixed(2)}
+                  ₹{(item.productId.price * item.quantity).toFixed(2)}
                 </p>
               </div>
+
               <button
                 onClick={() => removeItem(item.productId._id)}
                 className="text-red-500"
@@ -107,9 +116,16 @@ export default function Cart() {
           ))}
 
           <div className="text-right mt-4">
-            <h2 className="text-xl font-bold">Total: ${total.toFixed(2)}</h2>
+            {/* ✅ TOTAL FIX */}
+            <h2 className="text-xl font-bold">
+              Total: ₹{total.toFixed(2)}
+            </h2>
           </div>
-          <button onClick={()=> navigate("/checkout-address")} className="w-full bg-blue-500 text-white p-2 rounded">
+
+          <button
+            onClick={() => navigate("/checkout-address")}
+            className="w-full bg-blue-500 text-white p-2 rounded"
+          >
             Proceed to Checkout
           </button>
         </div>
