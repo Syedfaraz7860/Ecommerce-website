@@ -89,7 +89,7 @@ export default function Home() {
           >
             <Link to={`/product/${product._id}`}>
               
-              {/* ✅ FIXED IMAGE URL */}
+             
               <img
                 src={`http://localhost:5001${product.image}`}
                 alt={product.title}

@@ -10,7 +10,6 @@ import {
 
 const router = express.Router();
 
-// ✅ CREATE PRODUCT WITH IMAGE
 router.post('/add', upload.single("image"), createProduct);
 
 // GET ALL PRODUCTS

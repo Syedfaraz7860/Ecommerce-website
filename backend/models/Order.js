@@ -19,6 +19,7 @@ const orderSchema = new mongoose.Schema(
       },
     ],
 
+    // ✅ FIX: addressId हटाओ और address object use करो
     address: {
       fullName: String,
       phone: String,
